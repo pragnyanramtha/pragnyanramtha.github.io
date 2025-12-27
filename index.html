@@ -31,7 +31,14 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0f0f11; color: #e4e4e7; }
         .tab-btn.active { border-bottom: 2px solid #a78bfa; color: #fff; }
-        .tab-btn { color: #a1a1aa; transition: all 0.2s; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+        .tab-btn { 
+            color: #a1a1aa; 
+            transition: all 0.2s; 
+            min-height: 44px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
         .tab-btn:hover { color: #e4e4e7; }
         .module-content { display: none; }
         .module-content.active { display: block; }
@@ -53,11 +60,12 @@
                 font-size: 0.9rem;
             }
             /* Better spacing for cards on mobile */
-            .bg-card {
-                padding: 1rem !important;
+            .module-content .bg-card {
+                padding: 1rem;
             }
             /* Ensure mathematical formulas don't overflow */
-            mjx-container {
+            .solution-text mjx-container,
+            .q-text mjx-container {
                 overflow-x: auto;
                 overflow-y: hidden;
                 max-width: 100%;
