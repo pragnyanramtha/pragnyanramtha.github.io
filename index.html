@@ -31,47 +31,89 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0f0f11; color: #e4e4e7; }
         .tab-btn.active { border-bottom: 2px solid #a78bfa; color: #fff; }
-        .tab-btn { color: #a1a1aa; transition: all 0.2s; }
+        .tab-btn { 
+            color: #a1a1aa; 
+            transition: all 0.2s; 
+            min-height: 44px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
         .tab-btn:hover { color: #e4e4e7; }
         .module-content { display: none; }
         .module-content.active { display: block; }
-        .solution-text { color: #d4d4d8; margin-top: 0.5rem; line-height: 1.6; }
-        .q-text { font-weight: 500; color: #ffffff; margin-bottom: 1rem; }
+        .solution-text { color: #d4d4d8; margin-top: 0.5rem; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; }
+        .q-text { font-weight: 500; color: #ffffff; margin-bottom: 1rem; word-wrap: break-word; overflow-wrap: break-word; }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .tab-btn { 
+                font-size: 0.75rem; 
+                padding: 0.75rem 0.5rem;
+                min-width: 70px;
+            }
+            .q-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+            .solution-text {
+                font-size: 0.9rem;
+            }
+            /* Better spacing for cards on mobile */
+            .module-content .bg-card {
+                padding: 1rem;
+            }
+            /* Ensure mathematical formulas don't overflow */
+            .solution-text mjx-container,
+            .q-text mjx-container {
+                overflow-x: auto;
+                overflow-y: hidden;
+                max-width: 100%;
+                display: block;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .tab-btn {
+                font-size: 0.7rem;
+                padding: 0.875rem 0.375rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-bg text-text antialiased min-h-screen p-4 md:p-8">
+<body class="bg-bg text-text antialiased min-h-screen p-3 sm:p-4 md:p-8">
 
     <div class="max-w-5xl mx-auto">
         <!-- Header -->
-        <header class="mb-8 text-center border-b border-gray-800 pb-8">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        <header class="mb-6 sm:mb-8 text-center border-b border-gray-800 pb-6 sm:pb-8">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                 Quantitative Skills
             </h1>
-            <p class="text-muted text-lg">Complete Question Bank (Modules 1-5)</p>
+            <p class="text-muted text-base sm:text-lg">Complete Question Bank (Modules 1-5)</p>
         </header>
 
         <!-- Navigation Tabs -->
-        <div class="flex flex-wrap justify-center gap-6 mb-12 border-b border-gray-800 pb-1 sticky top-0 bg-bg/95 backdrop-blur-sm z-10 pt-4">
-            <button onclick="switchTab('m1')" id="btn-m1" class="tab-btn active pb-3 px-2 font-mono text-sm tracking-wider uppercase">Module 1</button>
-            <button onclick="switchTab('m2')" id="btn-m2" class="tab-btn pb-3 px-2 font-mono text-sm tracking-wider uppercase">Module 2</button>
-            <button onclick="switchTab('m3')" id="btn-m3" class="tab-btn pb-3 px-2 font-mono text-sm tracking-wider uppercase">Module 3</button>
-            <button onclick="switchTab('m4')" id="btn-m4" class="tab-btn pb-3 px-2 font-mono text-sm tracking-wider uppercase">Module 4</button>
-            <button onclick="switchTab('m5')" id="btn-m5" class="tab-btn pb-3 px-2 font-mono text-sm tracking-wider uppercase">Module 5</button>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12 border-b border-gray-800 pb-1 sticky top-0 bg-bg/95 backdrop-blur-sm z-10 pt-3 sm:pt-4">
+            <button onclick="switchTab('m1')" id="btn-m1" class="tab-btn active pb-3 px-2 sm:px-3 font-mono text-xs sm:text-sm tracking-wider uppercase">Module 1</button>
+            <button onclick="switchTab('m2')" id="btn-m2" class="tab-btn pb-3 px-2 sm:px-3 font-mono text-xs sm:text-sm tracking-wider uppercase">Module 2</button>
+            <button onclick="switchTab('m3')" id="btn-m3" class="tab-btn pb-3 px-2 sm:px-3 font-mono text-xs sm:text-sm tracking-wider uppercase">Module 3</button>
+            <button onclick="switchTab('m4')" id="btn-m4" class="tab-btn pb-3 px-2 sm:px-3 font-mono text-xs sm:text-sm tracking-wider uppercase">Module 4</button>
+            <button onclick="switchTab('m5')" id="btn-m5" class="tab-btn pb-3 px-2 sm:px-3 font-mono text-xs sm:text-sm tracking-wider uppercase">Module 5</button>
         </div>
 
         <!-- MODULE 1 CONTENT -->
-        <div id="m1" class="module-content active space-y-12">
+        <div id="m1" class="module-content active space-y-8 sm:space-y-10 md:space-y-12">
             
             <!-- SAQ List -->
             <div>
-                <h3 class="text-xl font-bold text-accent mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
-                <div class="grid gap-6">
+                <h3 class="text-lg sm:text-xl font-bold text-accent mb-4 sm:mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
                     <!-- Q1 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 1</div>
                         <div class="q-text">Find the sum of first 20 natural numbers?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Use the formula for the sum of the first \( n \) natural numbers: \( S_n = \frac{n(n+1)}{2} \). <br>
                                 Here \( n=20 \), so \( S_{20} = \frac{20(21)}{2} = 10 \times 21 = 210 \).
@@ -79,11 +121,11 @@
                         </div>
                     </div>
                     <!-- Q2 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 2</div>
                         <div class="q-text">What is the value of \(1^{2}+2^{2}+..........+10^{2}\) ?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 The sum of squares is given by \( \frac{n(n+1)(2n+1)}{6} \). <br>
                                 Substitute \( n=10 \): \( \frac{10(11)(21)}{6} = \frac{2310}{6} = 385 \).
@@ -91,22 +133,22 @@
                         </div>
                     </div>
                     <!-- Q3 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 3</div>
                         <div class="q-text">What is the unit digit of \(167\times2183\times497\times839\times235\times111\times1039\times251\times563\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Observe the factors. We have the number 235, which has a unit digit of 5. All other numbers in the product are odd. Since any odd number multiplied by 5 results in a number ending in 5, the unit digit of the entire product is 5.
                             </div>
                         </div>
                     </div>
                     <!-- Q4 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 4</div>
                         <div class="q-text">Find the remainder \(\frac{232\times43\times2347\times4671\times6988}{23}\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Find the remainder of each term divided by 23:
                                 \( 232 \to 2 \), \( 43 \to -3 \), \( 2347 \to 1 \), \( 4671 \to 2 \), \( 6988 \to -4 \). <br>
@@ -116,11 +158,11 @@
                         </div>
                     </div>
                     <!-- Q5 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 5</div>
                         <div class="q-text">The number of zeros at the end of 80!</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Count the factors of 5 in 80! using Legendre's Formula: \( \lfloor \frac{80}{5} \rfloor + \lfloor \frac{80}{25} \rfloor \). <br>
                                 \( 16 + 3 = 19 \). There are 19 zeros.
@@ -128,11 +170,11 @@
                         </div>
                     </div>
                     <!-- Q6 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 6</div>
                         <div class="q-text">Find the value of \(8 \times 88 \times 888\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Perform the multiplication directly: <br>
                                 \( 8 \times 88 = 704 \). <br>
@@ -141,11 +183,11 @@
                         </div>
                     </div>
                     <!-- Q7 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 7</div>
                         <div class="q-text">Find the LCM of 16, 18, 24 and 30.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Prime factorization: \( 16=2^4 \), \( 18=2 \cdot 3^2 \), \( 24=2^3 \cdot 3 \), \( 30=2 \cdot 3 \cdot 5 \). <br>
                                 Take the highest power of each prime: \( 2^4 \times 3^2 \times 5^1 = 16 \times 9 \times 5 = 720 \).
@@ -153,11 +195,11 @@
                         </div>
                     </div>
                     <!-- Q8 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 8</div>
                         <div class="q-text">Find the least number which when divided by 8, 9, 12 and 15 leaves the same remainder 5 in each case</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 The number is \( \text{LCM}(8, 9, 12, 15) + \text{Remainder} \). <br>
                                 The LCM is 360. Adding the remainder gives \( 360 + 5 = 365 \).
@@ -165,11 +207,11 @@
                         </div>
                     </div>
                     <!-- Q9 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 9</div>
                         <div class="q-text">Simplify \(\frac{423\times423-325\times325}{423-325}\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 This expression matches the form \( \frac{a^2 - b^2}{a - b} \), which simplifies to \( a + b \). <br>
                                 \( 423 + 325 = 748 \).
@@ -177,11 +219,11 @@
                         </div>
                     </div>
                     <!-- Q10 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 10</div>
                         <div class="q-text">Find Total number of factors \(N=4200\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Prime factorization of 4200 is \( 2^3 \cdot 3^1 \cdot 5^2 \cdot 7^1 \). <br>
                                 To find total factors, add 1 to each exponent and multiply: <br>
@@ -194,14 +236,14 @@
 
             <!-- LAQ List -->
             <div>
-                <h3 class="text-xl font-bold text-pink-500 mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
-                <div class="grid gap-6">
+                <h3 class="text-lg sm:text-xl font-bold text-pink-500 mb-4 sm:mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
                     <!-- L1 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 1</div>
                         <div class="q-text">The traffic signals at three different road crossings change after every 30, 45, 50 and 100 seconds respectively. If they all change simultaneously at 11:50 am, then at what time will they again change simultaneously?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 We need to find the LCM of the intervals 30, 45, 50, and 100. <br>
                                 LCM is 900 seconds. Converting 900 seconds to minutes: \( 900/60 = 15 \) minutes. <br>
@@ -210,11 +252,11 @@
                         </div>
                     </div>
                     <!-- L2 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 2</div>
                         <div class="q-text">Three wheels can complete 25, 21 and 16 revolutions per minute respectively. There is a red spot on each wheel that touches the ground at time zero. After how much time, all these spots will simultaneously touch the ground again?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Time for one revolution for each wheel is \( 60/25 \), \( 60/21 \), and \( 60/16 \) seconds. <br>
                                 We need the LCM of these fractions. <br>
@@ -223,11 +265,11 @@
                         </div>
                     </div>
                     <!-- L3 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 3</div>
                         <div class="q-text">7 is added to a certain number and the sum is multiplied by 5. The product is then divided by 3 and 4 is subtracted from the quotient. If the result comes to 16, then what is the original number?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Work backwards from the result 16: <br>
                                 Add 4: \( 16+4 = 20 \). <br>
@@ -238,11 +280,11 @@
                         </div>
                     </div>
                     <!-- L4 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 4</div>
                         <div class="q-text">There are some students to be seated in an auditorium. When they were seated in rows of 8,9,11, and 12, there always were 3 students left out to be seated. But when they were seated in 15 rows, non were left. Find the Minium number of student was more than 1000.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 The number \( N \) is of the form \( \text{LCM}(8,9,11,12)k + 3 \). <br>
                                 LCM is 792. So \( N = 792k + 3 \). We need \( N \) divisible by 15 and \( N > 1000 \). <br>
@@ -252,11 +294,11 @@
                         </div>
                     </div>
                     <!-- L5 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 5</div>
                         <div class="q-text">The girls start jogging from the same point around a circular track and each one complects one round in 24 seconds, 36 seconds and 48 seconds respectively. After how much time will they meet at one point?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Find the LCM of the lap times: 24, 36, and 48. <br>
                                 LCM(24, 36, 48) = 144 seconds. They meet after 144 seconds.
@@ -264,11 +306,11 @@
                         </div>
                     </div>
                     <!-- L6 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 6</div>
                         <div class="q-text">The cost of 4 bags and 3 boxes is Rs. 555 and the cost of 3 bags and 4 boxes Rs. 460. What is the cost of bag?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Equations: \( 4x + 3y = 555 \) and \( 3x + 4y = 460 \). <br>
                                 Multiply first by 3 and second by 4: \( 12x + 9y = 1665 \) and \( 12x + 16y = 1840 \). <br>
@@ -278,11 +320,11 @@
                         </div>
                     </div>
                     <!-- L7 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 7</div>
                         <div class="q-text">There are certain number of benches in a classroom. If four students sit on each bench three benches remain unoccupied. If, however, three students sit on each bench then three students remain standing in the class. Find the number of students in the class?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let \( B \) be benches and \( S \) be students. <br>
                                 Case 1: \( S = 4(B-3) \). Case 2: \( S = 3B + 3 \). <br>
@@ -292,11 +334,11 @@
                         </div>
                     </div>
                     <!-- L8 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 8</div>
                         <div class="q-text">In a group 70 people, 37 like coffee, 52 like tea each person likes at least one of the two drinks. Find the number of people who like both coffee and tea.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Using set theory: \( n(C \cup T) = n(C) + n(T) - n(C \cap T) \). <br>
                                 \( 70 = 37 + 52 - x \implies 70 = 89 - x \). <br>
@@ -305,11 +347,11 @@
                         </div>
                     </div>
                     <!-- L9 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 9</div>
                         <div class="q-text">One-third of the boys and one-half of the girls of a collage participated in a social work project. If the number of participating students in 300 out of which 100 are boys, what is the number of students in the collage?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Participating Boys = 100. Since this is 1/3 of total boys, Total Boys = 300. <br>
                                 Participating Girls = Total Participants (300) - Boys (100) = 200. <br>
@@ -319,11 +361,11 @@
                         </div>
                     </div>
                     <!-- L10 -->
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 10</div>
                         <div class="q-text">The value of \(\sqrt{10+\sqrt{25+\sqrt{108+\sqrt{154+\sqrt{225}}}}}\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Solve from inside out: <br>
                                 \( \sqrt{225} = 15 \). <br>
@@ -339,17 +381,17 @@
         </div>
 
         <!-- MODULE 2 CONTENT -->
-        <div id="m2" class="module-content space-y-12">
+        <div id="m2" class="module-content space-y-8 sm:space-y-10 md:space-y-12">
             
             <!-- Short Questions -->
             <div>
-                <h3 class="text-xl font-bold text-accent mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-accent mb-4 sm:mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 1</div>
                         <div class="q-text">The salary of a worker is first increased by 25%, then it is decreased by 12%. Then percentage change in his salary is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let initial salary be 100. Increased by 25% becomes 125. <br>
                                 Decreased by 12% means \( 125 \times 0.88 = 110 \). <br>
@@ -357,21 +399,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 2</div>
                         <div class="q-text">Find 4% of Rs 3125.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Calculation: \( \frac{4}{100} \times 3125 = 125 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 3</div>
                         <div class="q-text">After spending 69% of her money, a lady has Rs 93 How much had she at first?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 If she spent 69%, she has 31% left. <br>
                                 \( 31\% \text{ of Total} = 93 \). <br>
@@ -379,43 +421,43 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 4</div>
                         <div class="q-text">If the price of one kg of rice is increased by 25%, the increase is Rs 12. Find the new price of rice per kg.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 25% of the original price is Rs 12. So, original price = \( 12 \times 4 = 48 \). <br>
                                 New price = Original + Increase = \( 48 + 12 = 60 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 5</div>
                         <div class="q-text">If A's salary is 20% more than that of B, then how much per cent is B's salary less than that of A?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let B = 100. Then A = 120. <br>
                                 Difference is 20. Percentage less = \( \frac{20}{120} \times 100 = \frac{1}{6} \times 100 = 16.66\% \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 6</div>
                         <div class="q-text">If the profit made on a packet of tea is Rs 4 and the cost price of the packet is Rs 20, then how much is the profit percentage?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Profit % = \( \frac{\text{Profit}}{\text{CP}} \times 100 = \frac{4}{20} \times 100 = \frac{1}{5} \times 100 = 20\% \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 7</div>
                         <div class="q-text">Harish bought a second-hand typewriter for Rs 1200 and spent Rs 200 on its repairs. He sold it for Rs 1680. What was his profit or loss per cent?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Total Cost Price = \( 1200 + 200 = 1400 \). Selling Price = 1680. <br>
                                 Profit = \( 1680 - 1400 = 280 \). <br>
@@ -423,33 +465,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 8</div>
                         <div class="q-text">A dishonest fruit vendor professes to sell his goods at cost price but he uses a weight of 900 g for the kg weight. Find his gain per cent.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Error = 100g. True Weight = 900g. <br>
                                 Gain % = \( \frac{\text{Error}}{\text{True Weight}} \times 100 = \frac{100}{900} \times 100 = 11.11\% \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 9</div>
                         <div class="q-text">50 successive discounts of 2%, 4%, 6%, 8% and so on will in a single discount of?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 The series of discounts is \( 2, 4, 6 \dots \). The 50th term is \( 50 \times 2 = 100\% \). <br>
                                 Since one of the discounts is 100%, the price becomes 0. The single equivalent discount is 100%.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 10</div>
                         <div class="q-text">Find the single equivalent discount corresponding to the successive discounts of 10% and 15%?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Formula: \( x + y - \frac{xy}{100} \). <br>
                                 \( 10 + 15 - \frac{150}{100} = 25 - 1.5 = 23.5\% \).
@@ -461,13 +503,13 @@
 
             <!-- Long Questions -->
             <div>
-                <h3 class="text-xl font-bold text-pink-500 mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-pink-500 mb-4 sm:mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 1</div>
                         <div class="q-text">We have an article costing Rs. 10000 which is its marked price or tagged price. When we give discount of 10% and 20%, successively on this article, the selling price we get after this?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 First discount 10%: \( 10000 \times 0.9 = 9000 \). <br>
                                 Second discount 20%: \( 9000 \times 0.8 = 7200 \). <br>
@@ -475,11 +517,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 2</div>
                         <div class="q-text">The population of a town is 12500. It increases by 10% during the first year. During the second year, it decreases by 15% and increased by 20% during the third year. What is the population after 3 years?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Calculation: \( 12500 \times 1.10 \times 0.85 \times 1.20 \). <br>
                                 Step 1: \( 12500 \times 1.1 = 13750 \). <br>
@@ -488,11 +530,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 3</div>
                         <div class="q-text">In an examination, 33% of the students failed in Maths, 24% failed in English and 17% failed in both. Find the percentage of students who passed in both the subjects.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Percentage failed in at least one = \( n(M) + n(E) - n(M \cap E) \). <br>
                                 \( 33 + 24 - 17 = 40\% \). <br>
@@ -500,11 +542,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 4</div>
                         <div class="q-text">Find a single equivalent increase, if a number is successively increased by 10%, 20% and 30%.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let number be 100. <br>
                                 \( 100 \times 1.1 \times 1.2 \times 1.3 = 171.6 \). <br>
@@ -512,11 +554,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 5</div>
                         <div class="q-text">In an examination 35% of the students failed in Math, 25% of the students failed in English, 45% of the students failed in Hindi. If 10% of the students failed in Math and English, 20% of the students failed in English and Hindi, 30% of the students failed in Math and Hindi and 5% of the students failed in all the three subjects Math, English and Hindi, then find the percentage of students who passed in all three subjects.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Use inclusion-exclusion for failures: <br>
                                 \( n(A \cup B \cup C) = \sum n(A) - \sum n(A \cap B) + n(A \cap B \cap C) \). <br>
@@ -525,11 +567,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 6</div>
                         <div class="q-text">A man buys 3 tables and 12 chairs for Rs 2400. He sells the tables at a profit of 20% and chairs at a profit of 10% and makes a total profit of Rs 300. At what price did he buy tables and chairs?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let \( T \) and \( C \) be cost per item. <br>
                                 1) \( 3T + 12C = 2400 \). <br>
@@ -539,11 +581,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 7</div>
                         <div class="q-text">2/3 of a commodity is sold at 30% profit, 1/4 is sold at 16% profit and the rest at 12% profit. If a total profit of Rs 75 is earned, then find the value of the commodity.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Weighted average profit: \( (\frac{2}{3} \times 30) + (\frac{1}{4} \times 16) + (\frac{1}{12} \times 12) = 20 + 4 + 1 = 25\% \). <br>
                                 25% of Value = 75. <br>
@@ -551,22 +593,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 8</div>
                         <div class="q-text">Monoka started a business with an initial investment of Rs.500000. In the first year, he incurred a loss of 4%. However, during the second year, he earned a profit of 5% which in the third-year rise to 10%. Calculate his net profit for the entire period of three years.?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Final Amount: \( 500000 \times 0.96 \times 1.05 \times 1.10 = 554400 \). <br>
                                 Net Profit = \( 554400 - 500000 = 54400 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 9</div>
                         <div class="q-text">Pure ghee cost Rs 100 per kg. After adulteration it with vegetable oil costing Rs.50 per kg, a shopkeeper sells the mixture at rate of Rs. 96 per kg, thereby making a profit of 20%. In what ratio dose he mix the two?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Mean Cost Price = \( \frac{96}{1.2} = 80 \). <br>
                                 Using Alligation: <br>
@@ -576,11 +618,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 10</div>
                         <div class="q-text">If the manufacturer gains 10%, The wholesale dealer 15% and the retailer 25%, then find the cost of production of a table, the retailer price of which is Rs.1265?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let cost be \( x \). <br>
                                 \( x \times 1.10 \times 1.15 \times 1.25 = 1265 \). <br>
@@ -594,37 +636,37 @@
         </div>
 
         <!-- MODULE 3 CONTENT -->
-        <div id="m3" class="module-content space-y-12">
+        <div id="m3" class="module-content space-y-8 sm:space-y-10 md:space-y-12">
             
             <!-- Short Questions -->
             <div>
-                <h3 class="text-xl font-bold text-accent mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-accent mb-4 sm:mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 1</div>
                         <div class="q-text">A sum of Rs 800 is lent for one year at the rate of 18% per annum. Find the interest</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( SI = \frac{800 \times 18 \times 1}{100} = 144 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 2</div>
                         <div class="q-text">A sum of Rs 4000 is lent for 5 years at the rate of 15% per annum. Find the interest</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( SI = \frac{4000 \times 15 \times 5}{100} = 3000 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 3</div>
                         <div class="q-text">Anita borrowed Rs 400 from her friend at the rate of 12% per annum for 2 1/2 years. Find the interest and the amount paid by her.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( T = 2.5 \). <br>
                                 \( SI = \frac{400 \times 12 \times 2.5}{100} = 120 \). <br>
@@ -632,32 +674,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 4</div>
                         <div class="q-text">A borrowed Rs 5000 from B at simple interest. After 4 years, B received Rs 1000 more than the amount given to B on loan. The rate of interest was:</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Interest = 1000. Principal = 5000. Time = 4. <br>
                                 \( 1000 = \frac{5000 \times R \times 4}{100} \implies 1000 = 200R \implies R = 5\% \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 5</div>
                         <div class="q-text">If 1 Re produces Rs 9 as interest, in 60 years at simple interest, the rate percent is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 9 = \frac{1 \times R \times 60}{100} \implies 900 = 60R \implies R = 15\% \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 6</div>
                         <div class="q-text">Find the ratio of CI to SI on a certain sum at 5% per annum for 2 years.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 SI % for 2 yrs = 10%. <br>
                                 CI % for 2 yrs = \( 5 + 5 + 0.25 = 10.25\% \). <br>
@@ -665,11 +707,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 7</div>
                         <div class="q-text">If the CI on a certain sum for 2 years at 4% be Rs 510, what would be the SI?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 CI rate for 2 years at 4% is \( 4 + 4 + 0.16 = 8.16\% \). <br>
                                 SI rate is 8%. <br>
@@ -678,11 +720,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 8</div>
                         <div class="q-text">At what rate per cent compound interest, will Rs 400 amount to Rs 441 in 2 years?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 441 = 400(1 + \frac{R}{100})^2 \). <br>
                                 \( \frac{441}{400} = (\frac{21}{20})^2 = (1 + \frac{R}{100})^2 \). <br>
@@ -690,22 +732,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 9</div>
                         <div class="q-text">Rs 800 at 5% per annum compound interest amount to Rs 882 in</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( \frac{882}{800} = \frac{441}{400} = 1.1025 \). <br>
                                 Since \( (1.05)^2 = 1.1025 \), the time is 2 years.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 10</div>
                         <div class="q-text">On what principal will the compound interest for 3 years at 5 percent amount to Rs 63.05?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 CI factor for 3 yrs at 5%: \( (1.05)^3 - 1 = 1.157625 - 1 = 0.157625 \). <br>
                                 Principal = \( \frac{63.05}{0.157625} = 400 \).
@@ -717,13 +759,13 @@
 
             <!-- Long Questions -->
             <div>
-                <h3 class="text-xl font-bold text-pink-500 mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-pink-500 mb-4 sm:mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 1</div>
                         <div class="q-text">Aniket deposited two parts of a sum of Rs 25000 in different banks at the rates of 15% per annum and 18% per annum respectively. In one year, he got Rs 4050 as the total interest. What was the amount deposited at the rate of 18% per annum?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let amount at 18% be \( x \). Then 15% amount is \( 25000-x \). <br>
                                 \( 0.18x + 0.15(25000-x) = 4050 \). <br>
@@ -732,11 +774,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 2</div>
                         <div class="q-text">A certain sum of money amounts to Rs 1125 in 5 years and to Rs 1200 in 8 years. Find the sum</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Interest for 3 years = \( 1200 - 1125 = 75 \). <br>
                                 Interest for 1 year = 25. <br>
@@ -745,11 +787,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 3</div>
                         <div class="q-text">A sum was put at SI at a certain rate for 4 years. Had it been put at 5% lower rate, it would have fetched Rs 100 less. Find the sum</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 The reduction in interest is due to the 5% rate drop over 4 years. <br>
                                 Total % drop = \( 5 \times 4 = 20\% \). <br>
@@ -758,11 +800,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 4</div>
                         <div class="q-text">Arun borrowed a sum of money from Jayant at the rate of 8% per annum simple interest for the first four years, 10% per annum for the next 6 years and 12% per annum for the period beyond 10 years. If he pays a total of Rs 12160 as interest only at the end of 15 years, how much money did he borrow?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Total years = 15. <br>
                                 4 yrs @ 8% = 32%. <br>
@@ -773,11 +815,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 5</div>
                         <div class="q-text">Parameswaran invested an amount of Rs 12000 at the simple interest rate of 10 per cent per annum and another amount at the simple interest rate of 20 per cent per annum. The total interest earned at the end of one year on the total amount invested became 14 per cent per annum. find the total amount invested.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let second amount be \( x \). <br>
                                 \( 12000(0.10) + x(0.20) = (12000+x)(0.14) \). <br>
@@ -787,54 +829,54 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 6</div>
                         <div class="q-text">Raviraj invested an amount of Rs 10,000 at compound interest rate of 10 per cent per annum for a period of three years. How much amount will Raviraj get after 3 years?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( A = 10000(1.1)^3 = 10000(1.331) = 13310 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 7</div>
                         <div class="q-text">Find the amount of Rs 1000 in 1 year at 5 percent compound interest payable half-yearly.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Rate becomes 2.5% per half-year. Time = 2 periods. <br>
                                 \( A = 1000(1.025)^2 = 1000(1.050625) = 1050.63 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 8</div>
                         <div class="q-text">Find the amount of Rs 6400 in 1 year 6 months at 5 per cent compound interest, interest being calculated half yearly.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Rate = 2.5%. Time = 3 periods (1.5 years). <br>
                                 \( A = 6400(1.025)^3 = 6400(1.07689) \approx 6892.10 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 9</div>
                         <div class="q-text">What will be the compound interest acquired on a sum of Rs 12000 for 3 years at the rate of 10% per annum?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 CI factor for 10%, 3 years is \( 1.331 - 1 = 0.331 \). <br>
                                 Interest = \( 12000 \times 0.331 = 3972 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 10</div>
                         <div class="q-text">Find the difference between the compound interest and the simple interest for the sum Rs 2500 at 6% per annum for 2 years.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Difference formula for 2 years: \( P(\frac{R}{100})^2 \). <br>
                                 \( 2500(\frac{6}{100})^2 = 2500(0.0036) = 9 \).
@@ -846,17 +888,17 @@
         </div>
 
         <!-- MODULE 4 CONTENT -->
-        <div id="m4" class="module-content space-y-12">
+        <div id="m4" class="module-content space-y-8 sm:space-y-10 md:space-y-12">
             
             <!-- Short Questions -->
             <div>
-                <h3 class="text-xl font-bold text-accent mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-accent mb-4 sm:mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 1</div>
                         <div class="q-text">If \(3A=4B=5C\). Find A: B: \(C=?\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Take LCM of 3, 4, 5 which is 60. <br>
                                 \( A = 60/3 = 20 \). <br>
@@ -866,11 +908,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 2</div>
                         <div class="q-text">If A: \(B=4\): 5, b: \(c=2:5\), then find A: B: \(C=?\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 A:B = 4:5 and B:C = 2:5. <br>
                                 Multiply A:B by 2 to get 8:10. <br>
@@ -879,11 +921,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 3</div>
                         <div class="q-text">If A: \(B=5\): 6 and b: \(c=4\): 7 and c: \(d=3:1\), then find A: B: C: \(d=?\)</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 A:B:C = 5:6 and 4:7 -> 20:24:42 -> 10:12:21. <br>
                                 C:D = 3:1 -> 21:7. <br>
@@ -891,11 +933,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 4</div>
                         <div class="q-text">Two numbers are in the ratio 4:9 If the both numbers increase by 12 the ratio becomes 11: 21. The sum of the original numbers is?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( \frac{4x+12}{9x+12} = \frac{11}{21} \). <br>
                                 \( 84x + 252 = 99x + 132 \). <br>
@@ -904,33 +946,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 5</div>
                         <div class="q-text">Find a fourth proportional to the numbers 5, 8, 15.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 5:8 :: 15:x \). <br>
                                 \( 5x = 120 \implies x = 24 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 6</div>
                         <div class="q-text">A and B started a business by investing 22500 and 35000, respectively. Out of a total profit of 27600. B's share is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Ratio 225:350 = 9:14. Total parts = 23. <br>
                                 B's share = \( \frac{14}{23} \times 27600 = 14 \times 1200 = 16800 \).
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 7</div>
                         <div class="q-text">If the product of the ages of M and N is 486 years and the ratio of their ages is 3: 2, what will be the sum of their ages after four years?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 3x \times 2x = 486 \implies 6x^2 = 486 \implies x^2 = 81 \implies x = 9 \). <br>
                                 Ages: 27, 18. <br>
@@ -938,33 +980,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 8</div>
                         <div class="q-text">If 60% of \(A=\frac{3}{4}\) of B, then A :B is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 0.6A = 0.75B \implies \frac{A}{B} = \frac{0.75}{0.6} = \frac{75}{60} = \frac{5}{4} \). <br>
                                 Ratio is 5:4.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 9</div>
                         <div class="q-text">Express 50 paise: Rs. 4 in its Ratio form?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Convert to same unit: 50 paise : 400 paise. <br>
                                 Ratio 1:8.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 10</div>
                         <div class="q-text">A and B started a business by investing 22500 and 35000, respectively. Out of a total profit of 27600. B's share is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Same as Question 6. Answer: 16800.
                             </div>
@@ -975,13 +1017,13 @@
 
             <!-- Long Questions -->
             <div>
-                <h3 class="text-xl font-bold text-pink-500 mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-pink-500 mb-4 sm:mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 1</div>
                         <div class="q-text">A, B and C spend 80%,85% and 75% of their incomes respectively. If their saving are in the ratio 8:9:20 and the difference between the incomes of A and c is Rs 18000, then the income of B is?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Savings percentages: A(20%), B(15%), C(25%). <br>
                                 \( 0.2A : 0.15B : 0.25C = 8 : 9 : 20 \). <br>
@@ -991,11 +1033,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 2</div>
                         <div class="q-text">Four vessels of equal sizes contain mixture of spirit and water. The concentration of spirit in 4 vessels is 60%, 70%, 75% and 80% respectively. If all the four mixtures are mixed, find in the resultant mixture the ratio of spirit to water.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Average spirit = \( \frac{60+70+75+80}{4} = \frac{285}{4} = 71.25\% \). <br>
                                 Average water = \( 100 - 71.25 = 28.75\% \). <br>
@@ -1003,11 +1045,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 3</div>
                         <div class="q-text">Mr. Sharma, Mr. Gupta and Ms. Sinha invested ₹4000, ₹8000 and 6000 respectively, in a business. Mr. Sharma left after 6 months. If after 8 months, there was a gain of 34000, then what will be the share of Mr. Gupta?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Investment ratio = \( (4000 \times 6) : (8000 \times 8) : (6000 \times 8) \). <br>
                                 \( 24 : 64 : 48 = 3 : 8 : 6 \). Total 17 parts. <br>
@@ -1015,11 +1057,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 4</div>
                         <div class="q-text">The ratio of present ages of Sita and her son is 5: 2 respectively. Seven years hence, the ratio will be 2:1. What was the age of Sita when her son was born?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( \frac{5x+7}{2x+7} = \frac{2}{1} \implies 5x+7 = 4x+14 \implies x=7 \). <br>
                                 Present ages: 35 and 14. <br>
@@ -1027,11 +1069,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 5</div>
                         <div class="q-text">The present age of Suresh is twice his daughter's present age. Six years hence, the ratio between the ages of Suresh and his daughter will be respectively 23: 13. What is the present age of Suresh?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( S = 2D \). <br>
                                 \( \frac{2D+6}{D+6} = \frac{23}{13} \). <br>
@@ -1040,11 +1082,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 6</div>
                         <div class="q-text">There are 420 coins consist of one-rupee coins, 50 paise coins and 25 paise coins. If the ratio of their values is 2: 3:5, then the number of one-rupee coins is?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Value ratio \( 2:3:5 \). <br>
                                 Coins ratio \( \frac{2}{1} : \frac{3}{0.5} : \frac{5}{0.25} = 2 : 6 : 20 = 1 : 3 : 10 \). <br>
@@ -1053,11 +1095,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 7</div>
                         <div class="q-text">Three equal jugs are filled with a mixture of milk and water. The proportion of milk and water in each glass is in ratio 1:2, 2:3 and 3:4. The contents of the three jugs are emptied a single vessel. What is the proportion of milk and water in it?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Milk fractions: \( 1/3, 2/5, 3/7 \). Sum = \( \frac{35+42+45}{105} = \frac{122}{105} \). <br>
                                 Water fractions: \( 2/3, 3/5, 4/7 \). Sum = \( \frac{70+63+60}{105} = \frac{193}{105} \). <br>
@@ -1065,11 +1107,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 8</div>
                         <div class="q-text">A sum of Rs1290 is divided between A, B and C such that A's share is 1 1/2 times that of B and B' share is 3/4 times that of C. What is C's share?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( A = \frac{3}{2}B \), \( B = \frac{3}{4}C \). <br>
                                 \( A = \frac{3}{2}(\frac{3}{4}C) = \frac{9}{8}C \). <br>
@@ -1078,11 +1120,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 9</div>
                         <div class="q-text">Shankar started a business with an investment of Rs 120,000. After three months, Aniket joined him with an investment of Rs 190,000. They earned a profit of Rs 17,50,000 after one year. What is Aniket's share in the profit?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Shankar (12 months), Aniket (9 months). <br>
                                 Ratio: \( (120 \times 12) : (190 \times 9) = 144 : 171 = 16 : 19 \). <br>
@@ -1090,11 +1132,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 10</div>
                         <div class="q-text">Of the three numbers, second is twice the first and is also third. If the average of three numbers is 44, what is the largest number?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let numbers be \( a, b, c \). \( b = 2a \) and \( b = c \) (assuming "is also third" means equal). <br>
                                 Ratio \( 1 : 2 : 2 \). Sum = \( 44 \times 3 = 132 \). <br>
@@ -1107,114 +1149,114 @@
         </div>
 
         <!-- MODULE 5 CONTENT -->
-        <div id="m5" class="module-content space-y-12">
+        <div id="m5" class="module-content space-y-8 sm:space-y-10 md:space-y-12">
             
             <!-- Short Questions -->
             <div>
-                <h3 class="text-xl font-bold text-accent mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-accent mb-4 sm:mb-6 pl-2 border-l-4 border-accent">Short Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 1</div>
                         <div class="q-text">A train runs at the rate of 45 km an hour. What is its speed in meters per second?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( 45 \times \frac{5}{18} = 12.5 \) m/s.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 2</div>
                         <div class="q-text">A motor car takes 50 seconds to travel 500 meters. What is its speed in km per hour?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = 10 m/s. <br>
                                 \( 10 \times \frac{18}{5} = 36 \) km/h.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 3</div>
                         <div class="q-text">How many km per hour does a man walk who passes through a street 600 m long in 5 minutes?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = 600m / 300s = 2 m/s. <br>
                                 \( 2 \times 3.6 = 7.2 \) km/h.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 4</div>
                         <div class="q-text">A train covers a distance in 50 minutes at an average speed of \(48~km/h.\) At what speed must it run to cover the same distance in 40 minutes?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Distance = \( 48 \times \frac{50}{60} = 40 \) km. <br>
                                 New Speed = \( 40 / \frac{40}{60} = 60 \) km/h.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 5</div>
                         <div class="q-text">How long will a train 130 m long travelling at 40 km an hour, take to pass a kilometer stone?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = \( 40 \times \frac{5}{18} = \frac{100}{9} \) m/s. <br>
                                 Time = \( \frac{130}{100/9} = 11.7 \) seconds.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 6</div>
                         <div class="q-text">How long will a train 60 m long travelling at 40 km an hour, take to pass through a station whose platform is 90 m long?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Total distance = 60 + 90 = 150 m. <br>
                                 Time = \( \frac{150}{100/9} = 13.5 \) seconds.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 7</div>
                         <div class="q-text">A train passes a pole in 15 seconds and passes a platform 100 m long in 25 seconds. Find its length.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Takes 10s to cover 100m. Speed = 10 m/s. <br>
                                 Length = Speed \( \times \) Pole Time = \( 10 \times 15 = 150 \) m.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 8</div>
                         <div class="q-text">A man riding his bicycle covers 150 metres in 25 seconds. What is his speed in km per hour?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = 6 m/s. <br>
                                 \( 6 \times 3.6 = 21.6 \) km/h.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 9</div>
                         <div class="q-text">The speed of a boat when travelling downstream is \(32~km/hr\) whereas when travelling upstream it is \(28~km/hr\) what is the speed of the boat in still water?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = \( \frac{32+28}{2} = 30 \) km/h.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-muted mb-2">QUESTION 10</div>
                         <div class="q-text">A 100-m long train is running at the speed of \(30km/hr\) Find the time taken by it to pass a man standing near the railway line?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Speed = \( 30 \times \frac{5}{18} = \frac{25}{3} \) m/s. <br>
                                 Time = \( \frac{100}{25/3} = 12 \) seconds.
@@ -1226,13 +1268,13 @@
 
             <!-- Long Questions -->
             <div>
-                <h3 class="text-xl font-bold text-pink-500 mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
-                <div class="grid gap-6">
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                <h3 class="text-lg sm:text-xl font-bold text-pink-500 mb-4 sm:mb-6 pl-2 border-l-4 border-pink-500">Long Questions</h3>
+                <div class="grid gap-4 sm:gap-5 md:gap-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 1</div>
                         <div class="q-text">A man covers a certain distance between his house and office on scooter. Having an average speed of \(60~km/hr.\) he is late by 20 min. However, with a speed of 80km / hr. he reaches his office 10 min earlier. Find the distance between his house and office.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Time difference = 30 min = 0.5 hr. <br>
                                 \( \frac{D}{60} - \frac{D}{80} = 0.5 \). <br>
@@ -1240,11 +1282,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 2</div>
                         <div class="q-text">Two men A and B walk from P to Q, a distance of 22 km, at 5 and 6 km an hour respectively. B reaches Q, returns immediately and meets A at R. Find the distance from P to R.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let distance PR be \( x \). A travels \( x \), B travels \( 22 + (22-x) = 44-x \). <br>
                                 Time is same: \( \frac{x}{5} = \frac{44-x}{6} \). <br>
@@ -1252,22 +1294,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 3</div>
                         <div class="q-text">Without any stoppage a person travels a certain distance at an average speed of \(40~km/hr.\), and with stop-pages he covers the same distance at an average speed of \(30~km/hr\) How many minutes per hour does he stop?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Loss in distance due to stopping = \( 40 - 30 = 10 \) km. <br>
                                 Time to cover 10 km at 40 km/h = \( \frac{10}{40} \times 60 = 15 \) minutes.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 4</div>
                         <div class="q-text">A policeman goes after a thief who has 100 meters' start. If the policeman runs a kilometer in 8 minutes, and the thief a kilometer in 10 minutes, how far will the thief have gone before he is overtaken?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 P Speed = 125 m/min. T Speed = 100 m/min. Relative = 25 m/min. <br>
                                 Time to close 100m = 4 min. <br>
@@ -1275,33 +1317,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 5</div>
                         <div class="q-text">Ram travels at the rate of \(3~km/hr\). and he reaches 15 minutes late. If he travels at the rate of \(4km/hr.\) he reaches 15 minutes earlier. The distance Ram has to travel is</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Difference 30 min = 0.5 hr. <br>
                                 \( \frac{D}{3} - \frac{D}{4} = 0.5 \implies \frac{D}{12} = 0.5 \implies D = 6 \) km.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 6</div>
                         <div class="q-text">Ramesh travel by bus from city A to city B at an average speed of \(44km/hr.\) Suresh travel by taxi from city A to city B at an average speed of \(77km/hr\) and takes 6 hours lesser than time taken by Ramesh. What is the distance (in km) between the two cities?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( \frac{D}{44} - \frac{D}{77} = 6 \). <br>
                                 \( D(\frac{7-4}{308}) = 6 \implies 3D = 1848 \implies D = 616 \) km.
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 7</div>
                         <div class="q-text">A motor car does a journey in 12 hr. the first half at \(15~km/hr\) and the second half at \(30~km/hr\). Find the distance.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Let total dist be \( D \). <br>
                                 \( \frac{D/2}{15} + \frac{D/2}{30} = 12 \). <br>
@@ -1309,11 +1351,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 8</div>
                         <div class="q-text">A man takes 6 hrs. 30 min in walking to a certain place and riding back. He would have gained 2 hrs. 10 min by riding both ways. How long would he take to walk both ways?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 W + R = 6h 30m. <br>
                                 2R = 6h 30m - 2h 10m = 4h 20m. <br>
@@ -1321,11 +1363,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 9</div>
                         <div class="q-text">A train running at 35 km per hour takes 18 seconds to pass a platform. Next, it takes 12 seconds to pass a man walking at the rate of \(5~km/hr\). in the same direction. Find the length of the train and that of the platform.</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 Relative Speed (Man) = 30 km/h = 25/3 m/s. <br>
                                 Train Length = \( \frac{25}{3} \times 12 = 100 \) m. <br>
@@ -1335,11 +1377,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-4 sm:p-5 md:p-6">
                         <div class="text-xs font-mono text-pink-500 mb-2">QUESTION 10</div>
                         <div class="q-text">A boat running upstream takes 10 hours to cover a certain distance, while it takes 7 hours to cover the same distance running downstream. What is the ratio between the speed of the boat and that of the water current respectively?</div>
-                        <div class="border-t border-gray-800 pt-4">
-                            <span class="text-sm font-bold text-success uppercase">Solution</span>
+                        <div class="border-t border-gray-800 pt-3 sm:pt-4">
+                            <span class="text-xs sm:text-sm font-bold text-success uppercase">Solution</span>
                             <div class="solution-text">
                                 \( B-W = D/10 \), \( B+W = D/7 \). <br>
                                 \( B = \frac{1}{2}(\frac{D}{7} + \frac{D}{10}) = \frac{17D}{140} \). <br>
